@@ -1,0 +1,131 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+}
+li{
+  list-style: none;
+  margin-right: 10px;
+  
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+h1,h3{
+  text-align: center;
+  margin-top: 19vh;
+}
+p.home-p{
+  text-align: center;
+}
+hr{
+  width: 50%;
+  margin: auto;
+}
+.container{
+  padding:8vh;
+}
+.col-lg-3{
+  padding: 2rem;
+}
+.navbar{
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  /* border: 1px solid orange; */
+  /* background-color: yellow; */
+  background: #ffe259;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffa751, #ffe259);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffa751, #ffe259); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: black;
+  justify-content: center;
+}
+.title{
+ font-size: 3rem;
+ font-family: 'Indie Flower', cursive;
+}
+.Navbar-child{
+  background-color: white;
+  color:black;
+  display: flex;
+  justify-content: center;
+  height: 6vh;
+  align-content: center;
+  flex-wrap: wrap;
+  /* box-shadow: 1px -2px 20px 0px; */
+  box-shadow:rgba(228, 233, 235, 0.5) 0px 10px 70px;;
+}
+.form-box{
+  background-color: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  box-shadow:rgba(228, 233, 235, 0.5) 0px 10px 70px;;
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  margin:5% 35%;
+  padding: 2%;
+}
+.form-control{
+  background-color: white;
+  color: black;
+}
+.form-control:focus{
+  background-color: white;
+  color: grey ;
+}
+.form-control::placeholder{
+  color:lightgrey;
+}
+.form-select{
+  background-color: black;
+  color: white;
+  /* width: 5vw; */
+}
+.form-select:before{
+  content: '\f358';
+  font-family: "Font Awesome 5 free";
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  height: 50px;
+  width: 50px;
+  background: #E91E63;
+  text-align: center;
+  line-height: 50px;
+  color:#fff;
+  font-size: 30px;
+  pointer-events: none;
+}
+
+.card{
+  margin: 2rem auto;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  box-shadow: rgba(28, 28, 28, 0.1) 0px 4px 16px;;
+  /* align-items: center;  */
+  background-color: inherit;
+  color:inherit;
+  border-radius:10px;
+  /* border: 1px solid black; */
+  /* align-items:center; */
+}
+.profile{
+  text-align:center;
+  height:45vh;
+  width:23vw;
+  margin: 15vh auto;
+}
+.card-title{
+  font-size:1.8rem;
+  color:red;
+  /* text-align:center; */
+}
+
+#signUp-link{
+  color: blue;
+}
