@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alert from "./components/Alert";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { base_url } from "./services/helper";
 
 const App = () => {
   const [alert, setAlert] = useState(null);
