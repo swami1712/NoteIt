@@ -9,8 +9,12 @@ const NavbarChild = (props) => {
     localStorage.removeItem("token");
     Navigate("/login");
   };
+
+  // const { getUserDetails } = props;
+
   useEffect(() => {
     props.getUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -59,7 +63,9 @@ const NavbarChild = (props) => {
           </>
         ) : (
           <li>
-            <Link to="/logout">SignOut</Link>
+            <Link to="/logout" onClick={handleLogout}>
+              SignOut
+            </Link>
           </li>
         )}
       </ul>

@@ -10,7 +10,7 @@ const Logout = () => {
     try {
       const response = await axios.get(`${base_url}/logout`);
       if (response.status) {
-        console.log(response.status);
+        // console.log(response.status);
         localStorage.removeItem("token");
         navigate("/login");
       }
@@ -20,7 +20,7 @@ const Logout = () => {
   };
   useEffect(() => {
     fetchUserLogout();
-  }, []);
+  });
   return <></>;
 };
 
