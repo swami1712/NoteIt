@@ -89,7 +89,7 @@ const Displaynotes = (props) => {
 
   return (
     <>
-      {notes[0] ? (
+      {localStorage.getItem("token") ? (
         <>
           {/* <div className='search-box justify-content-center d-flex'>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -194,20 +194,17 @@ const Displaynotes = (props) => {
             </div>
           ) : (
             <>
-              <Spinner />
+              <h3>
+                you don't have any notes to display but u can make notes{" "}
+                <Link id="signUp-link" to="/addnotes">
+                  here
+                </Link>
+              </h3>
             </>
           )}
         </>
       ) : (
-        <>
-          <h3>
-            you don't have any notes to display but u can make notes{" "}
-            <Link id="signUp-link" to="/addnotes">
-              here
-            </Link>
-          </h3>
-          {/* <Spinner /> */}
-        </>
+        <h1>401 you are not authenticated</h1>
       )}
     </>
   );
