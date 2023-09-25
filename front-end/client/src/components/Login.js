@@ -19,7 +19,7 @@ function Login(props) {
       const { token } = data;
 
       const { success, message } = data;
-      console.log(success);
+      // console.log(success);
       if (success) {
         props.showAlert("success", `${message}`);
         localStorage.setItem("token", token, { expires: 1 });
