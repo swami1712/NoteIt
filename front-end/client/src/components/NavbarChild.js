@@ -35,7 +35,7 @@ const NavbarChild = (props) => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {props.userData.email}
+              {props.userData.email.slice(0, 8)}
             </Link>
             <ul className="dropdown-menu">
               <li>

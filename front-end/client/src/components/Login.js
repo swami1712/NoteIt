@@ -7,10 +7,12 @@ import { base_url } from "../services/helper";
 function Login(props) {
   const [email, setUsername] = useState("");
   const [password, setPw] = useState("");
+  const [loading, setLoading] = useState();
+
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const { data } = await axios.post(`${base_url}/login`, {
         email,
@@ -30,6 +32,7 @@ function Login(props) {
     } catch (err) {
       console.log(err);
     }
+    setLoading(false);
   };
 
   return (
@@ -66,7 +69,7 @@ function Login(props) {
           </div>
 
           <button className="btn btn-primary" type="submit">
-            Login
+            {loading ? "logging in..." : "Login"}
           </button>
           <p className="my-2">
             Don't have an account?{" "}

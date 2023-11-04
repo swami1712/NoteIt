@@ -10,6 +10,7 @@ const Signup = (props) => {
   const [email, setUsername] = useState("");
   const [password, setPw] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState();
 
   const Navigate = useNavigate();
   // useEffect(() => {
@@ -47,6 +48,7 @@ const Signup = (props) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(`${base_url}/register`, {
         name,
@@ -67,6 +69,7 @@ const Signup = (props) => {
     } catch (error) {
       console.error("Failed to register student:", error);
     }
+    setLoading(false);
   };
   return (
     <div className="form">
@@ -143,7 +146,7 @@ const Signup = (props) => {
             className="btn btn-primary"
             type="submit"
           >
-            Register
+            {loading ? "Registering..." : "SignUp"}
           </button>
           <p className="my-2">
             Already have an account?{" "}
