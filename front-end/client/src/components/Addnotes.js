@@ -6,7 +6,10 @@ import { base_url } from "../services/helper";
 const Addnotes = (props) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [loading, setLoading] = useState();
+
   const handleSubmit = async () => {
+    setLoading(true);
     const token = localStorage.getItem("token");
     let userId = jwtDecode(token);
     userId = userId.id;
@@ -24,6 +27,7 @@ const Addnotes = (props) => {
       .catch((err) => {
         console.log("could not add notes" + err);
       });
+    setLoading(false);
   };
 
   return (
@@ -62,7 +66,7 @@ const Addnotes = (props) => {
               ></textarea>
             </div>
             <div className="btn btn-primary" onClick={handleSubmit}>
-              Add note
+              {loading ? "Adding note..." : "Add note"}
             </div>
           </div>
         </div>

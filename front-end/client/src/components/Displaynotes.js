@@ -2,14 +2,15 @@ import jwtDecode from "jwt-decode";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Spinner from "./Spinner";
 import { base_url } from "../services/helper";
+import Spinner from "./Spinner";
 
 const Displaynotes = (props) => {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState();
   // const [isData, setIsdata] = useState(false)
 
   const token = localStorage.getItem("token");
@@ -26,12 +27,14 @@ const Displaynotes = (props) => {
   };
 
   const getNotes = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`${base_url}/getnotes/${userId}`);
       setNotes(res.data.notes);
     } catch (err) {
       console.log("could not fetch notes");
     }
+    setLoading(false);
   }, [userId]);
 
   useEffect(() => {
@@ -95,111 +98,123 @@ const Displaynotes = (props) => {
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input className='form-control ' type='text' placeholder='' />
                         </div> */}
-          {notes[0] ? (
-            <div className="row">
-              {notes.map((student) => (
-                <div className="col-lg-3" key={student._id}>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">{student.title}</h5>
-                      <p className="card-text">{student.description}</p>
-                      <img
-                        src="../icons/edit.png"
-                        height="16px"
-                        className="mx-2"
-                        alt="edit"
-                        role="button"
-                        onClick={() => updateNote(student._id)}
-                      />
-                      <img
-                        src="../icons/trash.png"
-                        height="16px"
-                        role="button"
-                        alt="delete"
-                        onClick={() => deleteNote(student._id)}
-                      />
-                    </div>
-                    <button
-                      hidden
-                      type="button"
-                      ref={ref}
-                      className="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                    >
-                      Launch demo modal
-                    </button>
-                    <div className="modal" id="exampleModal" aria-hidden="true">
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h1
-                              className="modal-title fs-5"
-                              id="exampleModalLabel"
-                            >
-                              Do update
-                            </h1>
+          {!loading ? (
+            <>
+              {notes[0] ? (
+                <>
+                  <div className="row">
+                    {notes.map((student) => (
+                      <div className="col-lg-3" key={student._id}>
+                        <div className="card">
+                          <div className="card-body">
+                            <h5 className="card-title">{student.title}</h5>
+                            <p className="card-text">{student.description}</p>
+                            <img
+                              src="../icons/edit.png"
+                              height="16px"
+                              className="mx-2"
+                              alt="edit"
+                              role="button"
+                              onClick={() => updateNote(student._id)}
+                            />
+                            <img
+                              src="../icons/trash.png"
+                              height="16px"
+                              role="button"
+                              alt="delete"
+                              onClick={() => deleteNote(student._id)}
+                            />
                           </div>
-                          <div className="modal-body">
-                            <div className="mb-3">
-                              <label
-                                htmlFor="exampleFormControlInput1"
-                                className="form-label"
-                              >
-                                Add Title
-                              </label>
-                              <input
-                                required
-                                type="name"
-                                className="form-control"
-                                id="exampleFormControlInput1"
-                                placeholder="my note"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                              />
-                            </div>
-                            <div className="mb-3">
-                              <label
-                                htmlFor="exampleFormControlTextarea1"
-                                className="form-label"
-                              >
-                                Description
-                              </label>
-                              <textarea
-                                required
-                                className="form-control"
-                                id="exampleFormControlTextarea1"
-                                rows="3"
-                                value={desc}
-                                onChange={(e) => setDesc(e.target.value)}
-                              ></textarea>
-                            </div>
-                          </div>
-                          <div className="modal-footer">
-                            {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
-                            <div
-                              className="btn btn-primary"
-                              data-bs-dismiss="modal"
-                              onClick={() => updateNotes(id)}
-                            >
-                              Update Note
+                          <button
+                            hidden
+                            type="button"
+                            ref={ref}
+                            className="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                          >
+                            Launch demo modal
+                          </button>
+                          <div
+                            className="modal"
+                            id="exampleModal"
+                            aria-hidden="true"
+                          >
+                            <div className="modal-dialog">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h1
+                                    className="modal-title fs-5"
+                                    id="exampleModalLabel"
+                                  >
+                                    Do update
+                                  </h1>
+                                </div>
+                                <div className="modal-body">
+                                  <div className="mb-3">
+                                    <label
+                                      htmlFor="exampleFormControlInput1"
+                                      className="form-label"
+                                    >
+                                      Add Title
+                                    </label>
+                                    <input
+                                      required
+                                      type="name"
+                                      className="form-control"
+                                      id="exampleFormControlInput1"
+                                      placeholder="my note"
+                                      value={title}
+                                      onChange={(e) => setTitle(e.target.value)}
+                                    />
+                                  </div>
+                                  <div className="mb-3">
+                                    <label
+                                      htmlFor="exampleFormControlTextarea1"
+                                      className="form-label"
+                                    >
+                                      Description
+                                    </label>
+                                    <textarea
+                                      required
+                                      className="form-control"
+                                      id="exampleFormControlTextarea1"
+                                      rows="3"
+                                      value={desc}
+                                      onChange={(e) => setDesc(e.target.value)}
+                                    ></textarea>
+                                  </div>
+                                </div>
+                                <div className="modal-footer">
+                                  {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
+                                  <div
+                                    className="btn btn-primary"
+                                    data-bs-dismiss="modal"
+                                    onClick={() => updateNotes(id)}
+                                  >
+                                    Update Note
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                </div>
-              ))}
-            </div>
+                </>
+              ) : (
+                <h3>
+                  you don't have any notes to display but u can make notes{" "}
+                  <Link id="signUp-link" to="/addnotes">
+                    here
+                  </Link>
+                </h3>
+              )}
+            </>
           ) : (
             <>
-              <h3>
-                you don't have any notes to display but u can make notes{" "}
-                <Link id="signUp-link" to="/addnotes">
-                  here
-                </Link>
-              </h3>
+              <Spinner />
             </>
           )}
         </>

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const NavbarChild = (props) => {
   // const token = localStorage.getIstem('token')
   const Navigate = useNavigate();
-
+  const email = props.userData.email;
   const handleLogout = () => {
     localStorage.removeItem("token");
     Navigate("/login");
@@ -35,7 +35,7 @@ const NavbarChild = (props) => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {props.userData.email.slice(0, 8)}
+              {props.userData.email && email.slice(0, 7)}
             </Link>
             <ul className="dropdown-menu">
               <li>
